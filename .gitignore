@@ -17,6 +17,7 @@
 
 /build_*
 /build
+/.flatpak-builder/
 /out
 /enc_temp_folder
 /resource/RC*

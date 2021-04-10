@@ -1,0 +1,56 @@
+---
+app-id: nl.twanvl.MagicSetEditor2
+runtime: org.gnome.Platform
+runtime-version: '40'
+sdk: org.gnome.Sdk
+branch: stable
+command: magicseteditor
+# rename-desktop-file: <TODO>
+# rename-icon: <TODO>
+finish-args:
+  - --socket=fallback-x11
+cleanup:
+  - /include
+  - /lib/debug
+  - '*.a'
+
+modules:
+  - name: boost
+    buildsystem: simple
+    build-commands:
+      - ./bootstrap.sh --with-libraries=regex --prefix=/app
+      - ./b2 -j $FLATPAK_BUILDER_N_JOBS link=shared
+      - ./b2 install
+    sources:
+      - type: git
+        url: https://github.com/boostorg/boost.git
+        tag: boost-1.75.0
+        commit: b7b1371294b4bdfc8d85e49236ebced114bc1d8f
+    cleanup:
+      - /lib/cmake
+
+  - name: wxwidgets
+    sources:
+      - type: git
+        url: https://github.com/wxWidgets/wxWidgets.git
+        tag: v3.1.5
+        commit: 9c0a8be1dc32063d91ed1901fd5fcd54f4f955a1
+    cleanup:
+      - /bin
+      - /lib/wx/config
+      - /lib/wx/include
+      - /share/aclocal
+      - /share/bakefile
+
+  - name: magicseteditor2
+    buildsystem: cmake-ninja
+    config-opts:
+      - -DCMAKE_BUILD_TYPE=Release
+    sources:
+      - type: git
+        url: https://github.com/twanvl/MagicSetEditor2.git
+        tag: v2.1.2
+        commit: 2ae1598d5832977c7a2daf54f27c42a04553ac8f
+    cleanup:
+      - /share/magicseteditor/resource/icon
+      - /share/magicseteditor/resource/win32_res.rc

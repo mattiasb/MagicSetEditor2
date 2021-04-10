@@ -73,6 +73,19 @@ cmake --build build
 
  Use `CMAKE_BUILD_TYPE=Debug` for a debug build.
 
+## Building a Flatpak
+
+```shell
+# Initial build
+$ flatpak-builder --force-clean build nl.twanvl.MagicSetEditor2.yaml
+
+# Follow-up builds
+$ flatpak-builder --disable-download --force-clean build nl.twanvl.MagicSetEditor2.yaml
+
+# Install
+$ flatpak-builder --disable-download --force-clean --install --user build nl.twanvl.MagicSetEditor2.yaml
+```
+
 ## Building on Linux
 
  * Install the dependencies; for example, on a Debian-based system:

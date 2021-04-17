@@ -109,8 +109,14 @@ if(WIN32)
   )
 endif()
 
-# Magic Set Editor Updater executable
+if(UNIX)
+  include(GNUInstallDirs)
+  install(TARGETS magicseteditor DESTINATION "${CMAKE_INSTALL_FULL_BINDIR}")
+  install(DIRECTORY "${CMAKE_CURRENT_LIST_DIR}/data" DESTINATION "${CMAKE_INSTALL_FULL_DATAROOTDIR}/magicseteditor")
+  install(DIRECTORY "${CMAKE_CURRENT_LIST_DIR}/resource" DESTINATION "${CMAKE_INSTALL_FULL_DATAROOTDIR}/magicseteditor")
+endif()
 
+# Magic Set Editor Updater executable
 add_executable(magicseteditor-updater WIN32)
 target_link_libraries(magicseteditor-updater PRIVATE wxWidgets::wxWidgets)
 target_sources(magicseteditor-updater PRIVATE src_updater/main.cpp src_updater/win32_res.rc src_updater/updater.ico)

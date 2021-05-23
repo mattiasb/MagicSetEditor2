@@ -47,10 +47,12 @@ modules:
     config-opts:
       - -DCMAKE_BUILD_TYPE=Release
     sources:
-      - type: git
-        url: https://github.com/twanvl/MagicSetEditor2.git
-        tag: v2.1.2
-        commit: 2ae1598d5832977c7a2daf54f27c42a04553ac8f
+      - type: dir
+        path: .
+      # - type: git
+      #   url: https://github.com/twanvl/MagicSetEditor2.git
+      #   tag: v2.1.2
+      #   commit: 2ae1598d5832977c7a2daf54f27c42a04553ac8f
     cleanup:
       - /share/magicseteditor/resource/icon
       - /share/magicseteditor/resource/win32_res.rc

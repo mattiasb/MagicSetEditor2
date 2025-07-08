@@ -30,8 +30,8 @@ modules:
     sources:
       - type: git
         url: https://github.com/wxWidgets/wxWidgets.git
-        tag: v3.1.5
-        commit: 9c0a8be1dc32063d91ed1901fd5fcd54f4f955a1
+        tag: v3.3.0
+        commit: e92f57b421938e00f0ad944c281c2e353eee2ab8
     cleanup:
       - /bin
       - /lib/wx/config

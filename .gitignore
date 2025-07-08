@@ -20,3 +20,5 @@
 /resource/RC*
 
 /resource/expected_locale_keys
+/*.flatpak
+/repo/

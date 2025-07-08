@@ -39,6 +39,19 @@ modules:
       - /share/aclocal
       - /share/bakefile
 
+  - name: templates
+    buildsystem: simple
+    sources:
+      - type: git
+        url: https://github.com/MagicSetEditorPacks/Full-Magic-Pack.git
+        commit: add2e3b9796547c4cbe80e93965679cc484a7489
+    build-commands:
+      # TODO: Use BSD Install instead.
+      - mkdir -p /app/share/magicseteditor/data/
+      - cp -r data/* /app/share/magicseteditor/data/
+      - mkdir -p /app/share/fonts
+      - cp -r 'Magic - Fonts'/*.ttf /app/share/fonts
+
   - name: magicseteditor2
     buildsystem: cmake-ninja
     config-opts:

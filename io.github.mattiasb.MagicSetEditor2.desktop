@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=Magic Set Editor
+Comment=Create custom Magic: the Gathering cards
+Exec=env GTK_THEME=Adwaita:light magicseteditor
+Icon=io.github.mattiasb.MagicSetEditor2
+Terminal=false
+Type=Application
+Categories=Game;

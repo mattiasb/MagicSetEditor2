@@ -112,8 +112,10 @@ endif()
 if(UNIX)
   include(GNUInstallDirs)
   install(TARGETS magicseteditor DESTINATION "${CMAKE_INSTALL_FULL_BINDIR}")
-  install(DIRECTORY "${CMAKE_CURRENT_LIST_DIR}/data" DESTINATION "${CMAKE_INSTALL_FULL_DATAROOTDIR}/magicseteditor")
-  install(DIRECTORY "${CMAKE_CURRENT_LIST_DIR}/resource" DESTINATION "${CMAKE_INSTALL_FULL_DATAROOTDIR}/magicseteditor")
+  install(FILES io.github.mattiasb.MagicSetEditor2.desktop DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/applications")
+  install(FILES resource/icon/io.github.mattiasb.MagicSetEditor2.png DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor/64x64/apps/")
+  install(DIRECTORY "${CMAKE_CURRENT_LIST_DIR}/data" DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/magicseteditor")
+  install(DIRECTORY "${CMAKE_CURRENT_LIST_DIR}/resource" DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/magicseteditor")
 endif()
 
 # Magic Set Editor Updater executable

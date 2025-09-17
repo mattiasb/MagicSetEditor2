@@ -60,7 +60,7 @@ modules:
       - type: git
         url: https://github.com/mattiasb/MagicSetEditor2.git
         branch: feature/haganbmj-cmake-install
-        commit: 8059e76880729bc737d87b08d9f454032eee524a
+        commit: 17001d9270cb937fb564c8aafda8d4464090edb6
     cleanup:
       - /share/magicseteditor/resource/icon
       - /share/magicseteditor/resource/win32_res.rc

@@ -77,7 +77,7 @@ $(REPO)/: $(REPO)/.lock | $(BUILD)/
 		|& pr -to 2
 
 $(BUNDLE): | $(BUILD)/ $(REPO)/
-	echo ⋅ Exporting bundle [$(BUNDLE)]
+	echo ⋅ Exporting bundle [$(BUNDLE)] (5-10m)
 	time flatpak build-bundle $(REPO)      \
 		                  $(BUNDLE)    \
 		                  $(APP_ID)    \

@@ -10,6 +10,8 @@ MAKEFLAGS   += --no-builtin-rules
 
 ################################################################################
 
+export TIMEFORMAT := Time: %0lR
+
 APP_ID=io.github.mattiasb.MagicSetEditor2
 MANIFEST=$(APP_ID).yaml
 
@@ -33,13 +35,13 @@ run: install
 bundle: $(BUNDLE)
 install: $(BUNDLE)
 	echo ⋅ Installing bundle [$(BUNDLE)]
-	flatpak install                   \
-		--user                    \
-		--noninteractive          \
-		--bundle                  \
-		--reinstall               \
-		$(BUNDLE)                 \
-		| pr -to 2
+	time flatpak install                   \
+		     --user                    \
+		     --noninteractive          \
+		     --bundle                  \
+		     --reinstall               \
+		     $(BUNDLE)                 \
+		|& pr -to 2
 
 shell:
 	echo flatpak-builder --run        \
@@ -56,28 +58,28 @@ clean:
 $(BUILD)/.done:
 $(BUILD)/: $(MANIFEST) $(BUILD)/.done
 	echo ⋅ Building [$(BUILD)]
-	flatpak-builder --force-clean     \
-			--disable-updates \
-			--ccache          \
-			--build-only      \
-			$(BUILD)          \
-			$(MANIFEST)       \
-		| pr -to 2
+	time flatpak-builder --force-clean     \
+			     --disable-updates \
+			     --ccache          \
+			     --build-only      \
+			     $(BUILD)          \
+			     $(MANIFEST)       \
+		|& pr -to 2
 	touch $(BUILD)/.done
 
 $(REPO)/.lock:
 $(REPO)/: $(REPO)/.lock | $(BUILD)/
 	echo ⋅ Exporting repository [$(REPO)]
-	flatpak-builder --finish-only     \
-			--repo=$(REPO)    \
-			$(BUILD)          \
-			$(MANIFEST)       \
-		| pr -to 2
+	time flatpak-builder --finish-only     \
+			     --repo=$(REPO)    \
+			     $(BUILD)          \
+			     $(MANIFEST)       \
+		|& pr -to 2
 
 $(BUNDLE): | $(BUILD)/ $(REPO)/
 	echo ⋅ Exporting bundle [$(BUNDLE)]
-	flatpak build-bundle $(REPO)      \
-		             $(BUNDLE)    \
-		             $(APP_ID)    \
-		             stable       \
-		| pr -to 2
+	time flatpak build-bundle $(REPO)      \
+		                  $(BUNDLE)    \
+		                  $(APP_ID)    \
+		                  stable       \
+		     |& pr -to 2
